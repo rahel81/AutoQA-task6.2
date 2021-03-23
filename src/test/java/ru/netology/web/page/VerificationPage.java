@@ -9,7 +9,7 @@ import ru.netology.web.data.DataHelper;
 
 import static com.codeborne.selenide.Selenide.$;
 
-@Name("Страница подтверждения")
+@Name("Подтверждение входа")
 public class VerificationPage extends AkitaPage {
     @FindBy(css = "[data-test-id=code] input")
     @Name("Код")

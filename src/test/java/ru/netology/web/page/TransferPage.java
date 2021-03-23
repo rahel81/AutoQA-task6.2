@@ -9,17 +9,17 @@ import ru.alfabank.alfatest.cucumber.api.AkitaPage;
 @Name("Страница перевода")
 public class TransferPage extends AkitaPage {
     @FindBy(css = "[data-test-id='amount'].input__control")
-    private static SelenideElement fieldSumma;
+    private SelenideElement fieldSumma;
     @FindBy(css = "[data-test-id='from'] .input__control")
-    private static SelenideElement fieldCardFrom;
+    private SelenideElement fieldCardFrom;
     @FindBy(css = "[data-test-id='action-transfer'] .button__text")
-    private static SelenideElement buttonReplenish;
+    private SelenideElement buttonReplenish;
     @FindBy(css = "[data-test-id='action-cancel'] .button__text")
     private SelenideElement buttonCancel;
     @FindBy(css = "[data-test-id= 'error-notification'] .button__text")
     private SelenideElement messageError;
 
-    public static DashboardPage transferMoney(String transferSumma, String transferFrom) {
+    public DashboardPage transferMoney(String transferSumma, String transferFrom) {
         fieldSumma.setValue(transferSumma);
         fieldCardFrom.setValue(transferFrom);
         buttonReplenish.click();

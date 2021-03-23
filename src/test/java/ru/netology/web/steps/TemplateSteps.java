@@ -45,7 +45,7 @@ public class TemplateSteps {
     @Тогда("^баланс его \"([^\"]*)\" карты из списка на главной странице должен стать \"([^\"]*)\" рублей")
     public void shouldBalanceCard1(String topUpCard, String balanceCard) {
         val dashboardPage = (DashboardPage) scenario.getCurrentPage().appeared();
-        int actualBalance = DashboardPage.getCardBalance(topUpCard);
+        int actualBalance = dashboardPage.getCardBalance(topUpCard);
         assertEquals(balanceCard.replace(" ", ""), actualBalance);
     }
 }
