@@ -1,4 +1,4 @@
-package ru.netology.web.steps;
+package ru.netology.web.step;
 
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Пусть;
@@ -19,7 +19,7 @@ import static ru.alfabank.tests.core.helpers.PropertyLoader.loadProperty;
 public class TemplateSteps {
     private final AkitaScenario scenario = AkitaScenario.getInstance();
 
-    @Пусть("^пользователь залогинен с именем \"([^\"]*)\" и паролем \"([^\"]*)\"$")
+    @Пусть("^пользователь залогинен с именем \"([^\"]*)\" и паролем \"([^\"]*)\";$")
     public void loginWithNameAndPassword(String login, String password) {
         val loginUrl = loadProperty("loginUrl");
         open(loginUrl);
@@ -45,8 +45,8 @@ public class TemplateSteps {
     @Тогда("^баланс его \"([^\"]*)\" карты из списка на главной странице должен стать \"([^\"]*)\" рублей")
     public void shouldBalanceCard1(String topUpCard, String balanceCard) {
         val dashboardPage = (DashboardPage) scenario.getCurrentPage().appeared();
-        int actualBalance = dashboardPage.getCardBalance(topUpCard);
-        assertEquals(balanceCard.replace(" ", ""), actualBalance);
+        String actualBalance = dashboardPage.getCardBalance(topUpCard).trim();
+        assertEquals(balanceCard, actualBalance);
     }
 }
 

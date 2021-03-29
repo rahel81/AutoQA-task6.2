@@ -1,5 +1,6 @@
 package ru.netology.web.page;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.alfabank.alfatest.cucumber.annotations.Name;
@@ -18,11 +19,10 @@ public class LoginPage extends AkitaPage {
     @FindBy(css = "[data-test-id=action-login]")
     public SelenideElement loginButton;
 
-
     public VerificationPage validLogin(DataHelper.AuthInfo info) {
         loginField.setValue(info.getLogin());
         passwordField.setValue(info.getPassword());
         loginButton.click();
-        return new VerificationPage();
+        return Selenide.page(VerificationPage.class);
     }
 }

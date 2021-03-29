@@ -1,14 +1,15 @@
 package ru.netology.web.page;
 
-import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import ru.alfabank.alfatest.cucumber.annotations.Name;
 import ru.alfabank.alfatest.cucumber.api.AkitaPage;
 
 @Name("Страница перевода")
 public class TransferPage extends AkitaPage {
-    @FindBy(css = "[data-test-id='amount'].input__control")
+    @FindBy(css = ".money-input .input__control")
     private SelenideElement fieldSumma;
     @FindBy(css = "[data-test-id='from'] .input__control")
     private SelenideElement fieldCardFrom;
@@ -16,17 +17,15 @@ public class TransferPage extends AkitaPage {
     private SelenideElement buttonReplenish;
     @FindBy(css = "[data-test-id='action-cancel'] .button__text")
     private SelenideElement buttonCancel;
-    @FindBy(css = "[data-test-id= 'error-notification'] .button__text")
-    private SelenideElement messageError;
+
 
     public DashboardPage transferMoney(String transferSumma, String transferFrom) {
-        fieldSumma.setValue(transferSumma);
-        fieldCardFrom.setValue(transferFrom);
+        fieldSumma.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE, transferSumma.trim());
+        fieldCardFrom.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE, transferFrom.trim());
         buttonReplenish.click();
-        return new DashboardPage();
-    }
-
-    public void transferMoneyError() {
-        messageError.shouldBe(Condition.visible);
+        return Selenide.page(DashboardPage.class);
     }
 }
+
+
+
